@@ -2,6 +2,9 @@ from pynput import keyboard
 from functools import partial
 from json_tools import read_json, write_json, OS
 from os import system
+from subprocess import call
+
+
 
 macros = read_json()
 
@@ -10,7 +13,7 @@ def on_activate(key):
         if macro['key'] == key:
             try:
                 if OS() == 'WINDOWS':
-                    system(macro['exe_path'])
+                    call(macro['exe_path'])
                 elif OS() == 'UNIX':
                     system('bash ' + macro['exe_path'])
             except:
